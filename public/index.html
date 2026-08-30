@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <title>Face Recognition Attendance System</title>
+    <style>
+      /* Reset for margin and padding */
+      /* Reset for margin and padding */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Navbar styling */
+      .navbar {
+        background-color: #33595e;
+        color: white;
+        padding: 12px 20px;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Arial", sans-serif;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      /* Logo section */
+      .navbar .logo {
+        font-weight: bold;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+
+      /* Navigation links container */
+      .nav-links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      /* Individual navigation link styling */
+      .nav-item {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      /* Hover effects */
+      .nav-item:hover {
+        color: #ff6347; /* Bright hover color */
+        transform: translateY(-2px); /* Slight upward movement */
+      }
+
+      /* Active link styling */
+      .nav-item.active {
+        color: #ff6347; /* Highlight color */
+        font-weight: bold;
+        text-decoration: underline; /* Optional: underline the active page */
+      }
+      /* Main content styling */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fdf1dd;
+      }
+
+      .main-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .video-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        margin-top: -10px;
+        margin-bottom: 40px;
+      }
+
+      #video {
+        width: 640px;
+        height: 480px;
+        border: #0d47a1 solid 1px;
+        border-radius: 8px;
+        box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+        transform: scaleX(
+          -1
+        ); /* Mirrors the video horizontally for a natural webcam view */
+      }
+
+      .image-container {
+        position: relative;
+        width: 640px;
+        height: auto;
+      }
+
+      #face {
+        width: 100%;
+        border: #000000 solid 1px;
+        color: #ffffff;
+        border-radius: 8px;
+        display: block;
+        box-shadow: -10px 5px 5px rgba(0, 0, 0, 0.2);
+        background: #1a1919;
+      }
+
+      #canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      #capture {
+        padding: 10px 20px;
+        background-color: #37e003;
+        color: white;
+        font-size: 16px;
+        border: #0d47a1 solid 1px;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-left: 10px;
+      }
+
+      .shared-button {
+        padding: 10px 20px;
+        background-color: #2196f3;
+        color: white;
+        font-size: 16px;
+        border: #0d47a1 solid 1px;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-left: 10px;
+      }
+
+      .shared-button:hover {
+        background-color: #1976d2;
+        transform: scale(1.05);
+      }
+
+      .shared-button:active {
+        background-color: #0d47a1;
+        transform: scale(0.98);
+      }
+
+      .extra-ui {
+        margin-top: 20px;
+        text-align: center;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <span class="logo">Face Recognition Attendance</span>
+      <div class="nav-links">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="about.html" class="nav-item">About</a>
+        <a href="register.html" class="nav-item">User Registration</a>
+      </div>
+    </nav>
+
+    <div class="main-wrapper">
+      <!-- Webcam + Image/Canvas side by side -->
+      <div class="video-image-container">
+        <!-- Left: Webcam -->
+        <video id="video" autoplay muted playsinline></video>
+
+        <!-- Right: Image with Canvas overlay ((/images/Course/BCT 2022/Unit001/attendees/2.jpg))-->
+        <div class="image-container">
+          <img height="480px" id="face" src="" alt="Waiting for capture..." />
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Extra UI elements (example) -->
+      <div class="extra-ui">
+        <button id="capture" class="shared-button">Capture</button>
+
+        <button id="downloadCSV" class="shared-button">Download CSV</button>
+
+        <button id="downloadPDF" class="shared-button">Download PDF</button>
+
+        <p></p>
+      </div>
+    </div>
+    <footer
+      style="background: #333; color: white; text-align: center; padding: 10px"
+    >
+      &copy; 2025 Face Recognition Attendance | All rights reserved.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./face-api.min.js"></script>
+    <script src="./scripts.js"></script>
+  </body>
+</html>

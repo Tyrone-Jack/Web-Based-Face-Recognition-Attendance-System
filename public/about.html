@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Face Recognition Attendance</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #33595e;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo section */
+.navbar .logo {
+  font-weight: bold;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+/* Navigation links container */
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Individual navigation link styling */
+.nav-item {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effects */
+.nav-item:hover {
+  color: #ff6347; /* Bright hover color */
+  transform: translateY(-2px); /* Slight upward movement */
+}
+
+/* Active link styling */
+.nav-item.active {
+  color: #ff6347; /* Highlight color */
+  font-weight: bold;
+  text-decoration: underline; /* Optional: underline the active page */
+}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdf1dd;
+      color: #333;
+    }
+
+    nav {
+      background-color: #33595e;
+      color: white;
+      padding: 12px 20px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1976d2;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <span class="logo">Face Recognition Attendance</span>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About</a>
+      <a href="register.html" class="nav-item">User Registration</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>About This System</h1>
+    <p>
+      The <strong>Face Recognition Attendance System</strong> is a modern web-based application designed to streamline the process of tracking attendance using real-time facial recognition.
+    </p>
+    <p>
+      Built using <code>face-api.js</code>, <code>JavaScript</code>, and a <code>Node.js</code> backend, this system automates attendance capturing by recognizing faces from a webcam feed and logging their presence securely.
+    </p>
+    <p>
+      Its key features include:
+      <ul>
+        <li>Webcam face detection</li>
+        <li>Accurate attendance logging with date and time</li>
+        <li>CSV & PDF export options</li>
+        <li>Organized attendace form access</li>
+      </ul>
+    </p>
+    <p>
+      This project is part of the <strong>Computer System Project</strong> unit at <em>Multimedia University of Kenya</em>.
+    </p>
+    <p>
+      Developed by dedicated students to offer a simple yet efficient solution to traditional roll-call methods.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Face Recognition Attendance | All rights reserved.
+  </footer>
+</body>
+</html>
